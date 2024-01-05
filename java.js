@@ -11,6 +11,7 @@ function getComputerChoice(){
 // Player choice
 
 function getPlayerChoice(){
+
     let playerChoice = prompt("Please enter Rock, Paper or Scissors")
     return playerChoice
 }
@@ -25,36 +26,36 @@ console.log(computerSelection)
 
 function checkWinner(playerSelection, computerSelection){
 
-if(playerSelection == computerSelection){
-    return "Tie";
-}
-else if(playerSelection == "rock" && computerSelection == "scissors"){
-    return "Player Wins";
-}
-else if(playerSelection == "paper" && computerSelection == "rock"){
-    return "Player Wins";
-}
-else if(playerSelection == "scissors" && computerSelection == "paper"){
-    return "Player Wins";
-}
-else {return "Computer Wins";
-}
+    if(playerSelection == computerSelection){
+        return "Tie";
+    }
+    else if(playerSelection == "rock" && computerSelection == "scissors"){
+        return "Player Wins";
+    }
+    else if(playerSelection == "paper" && computerSelection == "rock"){
+        return "Player Wins";
+    }
+    else if(playerSelection == "scissors" && computerSelection == "paper"){
+        return "Player Wins";
+    }
+    else {return "Computer Wins";
+    }
 
 }
 
 // Play a round
 
 function playRound(playerSelection, computerSelection){
-const result = checkWinner(playerSelection, computerSelection);
-if(result == "Tie"){
-    return "It's a Tie!"
-}
-else if(result == "Player Wins"){
-    return `You win! ${playerSelection} beats ${computerSelection}`
-}
-else{
-    return `You lose! ${computerSelection} beats ${playerSelection}`
-}
+    const result = checkWinner(playerSelection, computerSelection);
+    if(result == "Tie"){
+        return "It's a Tie!"
+    }
+    else if(result == "Player Wins"){
+        return `You win! ${playerSelection} beats ${computerSelection}`
+    }
+    else{
+        return `You lose! ${computerSelection} beats ${playerSelection}`
+    }
 
 }
 
