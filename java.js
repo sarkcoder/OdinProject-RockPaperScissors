@@ -17,37 +17,51 @@ function getPlayerChoice(){
     return playerChoice
 }
 
-
-// Check who won
-
-function checkWinner(playerSelection,computerSelection){
-
-playerSelection = getPlayerChoice()
-computerSelection = getComputerChoice()
+const playerSelection = getPlayerChoice();
+const computerSelection = getComputerChoice();
 
 console.log(playerSelection)
 console.log(computerSelection)
 
-if(playerSelection===computerSelection){
-    return "It's a tie! You both picked the same choice";
+// Check who won
+
+function checkWinner(playerSelection, computerSelection){
+
+if(playerSelection == computerSelection){
+    return "Tie";
 }
-else if(playerSelection==="rock"&&computerSelection==="scissors"){
-    return "You win, Rock beats Scissors";
+else if(playerSelection == "rock" && computerSelection == "scissors"){
+    return "Player Wins";
 }
-else if(playerSelection==="paper"&&computerSelection==="rock"){
-    return "You win, Paper beats Rock";
+else if(playerSelection == "paper" && computerSelection == "rock"){
+    return "Player Wins";
 }
-else if(playerSelection==="scissors"&&computerSelection==="paper"){
-    return "You win, Scissors beat Paper";
+else if(playerSelection == "scissors" && computerSelection == "paper"){
+    return "Player Wins";
 }
-else {return "You lose - ";
+else {return "Computer Wins";
 }
 
 }
 
+function playRound(playerSelection, computerSelection){
+const result = checkWinner(playerSelection, computerSelection);
+if(result == "Tie"){
+    return "It's a Tie!"
+}
+else if(result == "Player Wins"){
+    return `You win! ${playerSelection} beats ${computerSelection}`
+}
+else{
+    return `You lose! ${computerSelection} beats ${playerSelection}`
+}
 
+}
 
 // Debugging
 
 
-console.log(checkWinner())
+console.log(playRound(playerSelection, computerSelection))
+
+
+// `You lose - ${computerSelection} beats ${playerSelection}
