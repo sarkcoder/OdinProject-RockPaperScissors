@@ -8,8 +8,6 @@ function getComputerChoice(){
     return computerChoice
 }
 
-
-
 // Player choice
 
 function getPlayerChoice(){
@@ -44,6 +42,8 @@ else {return "Computer Wins";
 
 }
 
+// Play a round
+
 function playRound(playerSelection, computerSelection){
 const result = checkWinner(playerSelection, computerSelection);
 if(result == "Tie"){
@@ -58,10 +58,15 @@ else{
 
 }
 
+function game(){
+    console.log("Game Start")
+    for (let i = 0; i < 5; i++){
+        const playerSelection = getPlayerChoice();
+        const computerSelection = getComputerChoice();
+        console.log(playRound(playerSelection, computerSelection));
+    }
+}
 // Debugging
 
 
-console.log(playRound(playerSelection, computerSelection))
-
-
-// `You lose - ${computerSelection} beats ${playerSelection}
+game()
