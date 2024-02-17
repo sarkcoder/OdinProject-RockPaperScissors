@@ -1,5 +1,14 @@
-// Choices
+// Declarations
 const array = ["rock", "paper", "scissors"];
+const buttons = document.querySelectorAll('button');
+const resulttext = document.getElementById('results')
+const winnertext = document.getElementById('winner')
+const scoretext = document.getElementById('scores')
+
+
+let scorePlayer = 0;
+let scoreComputer = 0;
+
 
 // Randomly generate Computer choice
 
@@ -8,84 +17,71 @@ function getComputerChoice(){
     return computerChoice
 }
 
-// Player choice
+function playRound(playerSelection){
 
-function getPlayerChoice(){
+    let result = ""
+    let computerSelection = getComputerChoice();
+    
+    if      (playerSelection == computerSelection){
+            result = `Tie, you both chose ${playerSelection}`
+            
+    }
 
-    let playerChoice = prompt("Please enter Rock, Paper or Scissors")
-    return playerChoice
+    else if ((playerSelection == "rock" && computerSelection == "scissors") ||
+            (playerSelection == "paper" && computerSelection == "rock") ||
+            (playerSelection == "scissors" && computerSelection == "paper")) {
+            scorePlayer ++
+            result = `You win! ${playerSelection} beats ${computerSelection}`
+            
+
+    }
+    
+    else   {
+            scoreComputer ++
+            result = `You lose! ${computerSelection} beats ${playerSelection}`
+            
+    }    
+            resulttext.textContent = result
+            scoretext.textContent = `Your score : ${scorePlayer} Computer's score ${scoreComputer}`
+            
+            
 }
 
-const playerSelection = getPlayerChoice();
-const computerSelection = getComputerChoice();
+function trackwinner(){
 
-console.log(playerSelection)
-console.log(computerSelection)
+    let winner = ""
 
-// Check who won
+    if (scorePlayer == 5){
+        endGame()
+        winner = "Player wins the match!"
+    }
+    else if (scoreComputer == 5){
+        endGame()
+        winner = "Computer wins the match!"
+    }
+    else {winner = "continue"}
 
-function checkWinner(playerSelection, computerSelection){
+    winnertext.textContent = winner
 
-    if(playerSelection == computerSelection){
-        return "Tie";
-    }
-    else if(playerSelection == "rock" && computerSelection == "scissors"){
-        return "Player Wins";
-    }
-    else if(playerSelection == "paper" && computerSelection == "rock"){
-        return "Player Wins";
-    }
-    else if(playerSelection == "scissors" && computerSelection == "paper"){
-        return "Player Wins";
-    }
-    else {return "Computer Wins";
-    }
 
 }
 
-// Play a round
-
-function playRound(playerSelection, computerSelection){
-    const result = checkWinner(playerSelection, computerSelection);
-    if(result == "Tie"){
-        return "It's a Tie!"
-    }
-    else if(result == "Player Wins"){
-        return `You win! ${playerSelection} beats ${computerSelection}`
-    }
-    else{
-        return `You lose! ${computerSelection} beats ${playerSelection}`
-    }
-
+// Disable buttons if player or computer reaches 5 points
+function endGame(){
+    buttons.forEach(elem => {
+        elem.disabled = true
+    })
 }
 
-function game(){
-    let scorePlayer = 0;
-    let scoreComputer = 0;
-    console.log("Game Start")
-    for (let i = 0; i < 5; i++){
-        const playerSelection = getPlayerChoice();
-        const computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection));
-        if (checkWinner(playerSelection, computerSelection) == "Player Wins"){
-            scorePlayer++;
-        }
-        else if (checkWinner(playerSelection, computerSelection) == "Computer Wins"){
-            scoreComputer++;
-        }
-        }
-    console.log("Game Ends");
-    if(scorePlayer > scoreComputer){
-        console.log("Player was the winner!")
-    }
-    else if(scorePlayer < scoreComputer){
-        console.log("Computer was the winner")
-    }
-    else{
-        console.log("Its a tie!")
-    }
-}
-// Debugging
+buttons.forEach(button =>{
+        button.addEventListener('click', function(){
+    
+        playRound(button.id)
+        trackwinner()
+        
+        //debugging 
+        //console.log (`Player Score = ${scorePlayer}`)
+        //console.log (`Computer Score = ${scoreComputer}`)
+})
 
-
-game()
+})
